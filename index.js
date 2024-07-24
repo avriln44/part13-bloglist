@@ -1,21 +1,24 @@
-require('dotenv').config();
+const express = require('express');
+const app = express();
 
-const { Sequelize, QueryTypes } = require('sequelize');
+const { PORT } = require('./util/config');
+const { connectToDatabase } = require('./util/db');
 
-const sequelize = new Sequelize(process.env.DATABASE_URL);
+const blogsRouter = require('./controllers/blogs');
+const usersRouter = require('./controllers/users');
+const loginRouter = require('./controllers/login');
 
-const main = async () => {
-  try {
-    await sequelize.authenticate();
+app.use(express.json());
 
-    const blogs = await sequelize.query('SELECT * FROM blogs', {
-      type: QueryTypes.SELECT,
-    });
-    console.log(blogs);
-    sequelize.close();
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
+app.use('/api/blogs', blogsRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/login', loginRouter);
+
+const start = async () => {
+  await connectToDatabase();
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 };
 
-main();
+start();

@@ -1,0 +1,13 @@
+POST http://localhost:3001/api/blogs 
+Content-Type: application/json 
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1uIiwiaWQiOjYsImlhdCI6MTcyMTcxOTUxNn0.yEBNDOotbL45kpnbwJ0x6Tto7jGM9UOYSoIF0p6SN24
+
+{
+    "author": "Minh te",
+    "url": "http://minhte.com",
+    "title": "Nothing to eat",
+    "likes": 0,
+    "user": {
+        "name": "Minh Nhat"
+    }
+}
