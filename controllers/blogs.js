@@ -25,6 +25,19 @@ router.get('/', async (req, res) => {
   res.json(blogs);
 });
 
+router.get('/authors', async (req, res) => {
+  const authors = await Blog.findAll({
+    attributes: [
+      'author',
+      [sequelize.fn('COUNT', sequelize.col('title')), 'articles'],
+      [sequelize.fn('SUM', sequelize.col('likes')), 'likes'],
+    ],
+    order: [['likes', 'DESC']],
+    group: ['author'],
+  });
+  res.json(authors);
+});
+
 const tokenExtractor = (req, res, next) => {
   const authorization = req.get('authorization');
   if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
