@@ -31,6 +31,24 @@ Blog.init(
       allowNull: false,
       references: { model: 'users', key: 'id' },
     },
+    created_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    updated_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    year: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        min: 1991,
+        max: new Date().getFullYear(),
+      },
+    },
   },
   {
     sequelize,

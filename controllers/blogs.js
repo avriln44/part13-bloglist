@@ -29,7 +29,7 @@ router.get('/authors', async (req, res) => {
   const authors = await Blog.findAll({
     attributes: [
       'author',
-      [sequelize.fn('COUNT', sequelize.col('title')), 'articles'],
+      [sequelize.fn('COUNT', sequelize.col('author')), 'articles'],
       [sequelize.fn('SUM', sequelize.col('likes')), 'likes'],
     ],
     order: [['likes', 'DESC']],
@@ -62,7 +62,12 @@ router.post('/', tokenExtractor, async (req, res) => {
     });
     res.json(blog);
   } catch (error) {
-    return res.status(400).json({ error });
+    if (error.name === 'SequelizeValidationError') {
+      return res
+        .status(400)
+        .json({ error: error.errors.map((e) => e.message) });
+    }
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 

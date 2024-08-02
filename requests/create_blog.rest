@@ -3,10 +3,10 @@ Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1uIiwiaWQiOjYsImlhdCI6MTcyMTcxOTUxNn0.yEBNDOotbL45kpnbwJ0x6Tto7jGM9UOYSoIF0p6SN24
 
 {
-    "author": "Minh te",
+    "author": "Minh nguyet",
     "url": "http://minhte.com",
-    "title": "Nothing to eat",
-    "likes": 0,
+    "title": "Next",
+    "likes": 11,
     "user": {
         "name": "Minh Nhat"
     }
